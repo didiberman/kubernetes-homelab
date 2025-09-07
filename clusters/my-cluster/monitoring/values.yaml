@@ -1,0 +1,6 @@
+prometheusOperator:
+  admissionWebhooks:
+    patch:
+      enabled: true
+      jobAnnotations:
+        "helm.sh/hook-delete-policy": before-hook-creation
