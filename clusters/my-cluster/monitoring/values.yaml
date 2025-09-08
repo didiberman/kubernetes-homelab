@@ -1,0 +1,28 @@
+prometheusOperator:
+  admissionWebhooks:
+    patch:
+      enabled: true
+      image:
+        repository: registry.k8s.io/ingress-nginx/kube-webhook-certgen
+        tag: v1.6.2
+      priorityClassName: ""
+      podAnnotations: {}
+      podSecurityContext: {}
+      runAsUser: 2000
+      seccompProfile:
+        type: RuntimeDefault
+      securityContext:
+        fsGroup: 2000
+      serviceAccount:
+        create: true
+        name: kube-prometheus-stack-admission
+        automountServiceAccountToken: true
+grafana:
+  enabled: true
+  service:
+    type: LoadBalancer
+  adminPassword: prom-operator
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
